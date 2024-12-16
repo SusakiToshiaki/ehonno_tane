@@ -26,8 +26,8 @@ nlp = spacy.load(model_path)
 
 
 # 必要な環境変数を取得
-PRIVATE_KEY = st.secrets["google"]["PRIVATE_KEY"]
-CLIENT_EMAIL = st.secrets["google"]["CLIENT_EMAIL"]
+PRIVATE_KEY = st.secrets["google"]["GOOGLE_PRIVATE_KEY"]
+CLIENT_EMAIL = st.secrets["google"]["GOOGLE_CLIENT_EMAIL"]
 SPREADSHEET_ID = st.secrets["google"]["SPREADSHEET_ID"]
 OPENAI_API_KEY = st.secrets["api_keys"]["OPENAI_API_KEY"]
 
