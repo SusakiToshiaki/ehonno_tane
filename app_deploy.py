@@ -320,8 +320,8 @@ def append_story_elements_to_sheet(story_elements, worksheet):
 
 
 # 背景画像設定
-background_image_path = Path(r"C:\Users\toshi\ehonnotane\ehonno_tane\product_image\Background.png")
-logo_image_path = Path(r"C:\Users\toshi\ehonnotane\ehonno_tane\product_image\Logo.png")
+background_image_path = Path("product_image/Background.png")
+logo_image_path = Path("product_image/Logo.png")
 
 def image_to_base64(image_path):
     return base64.b64encode(image_path.read_bytes()).decode()
