@@ -1,12 +1,12 @@
+import streamlit as st
 import os
 import requests
 import openai
-from dotenv import load_dotenv
 
 # 環境変数の読み込み
-load_dotenv()
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-IDEOGRAM_API_KEY = os.environ.get("IDEOGRAM_API_KEY")
+
+OPENAI_API_KEY = st.secrets["api_keys"]["OPENAI_API_KEY"]
+IDEOGRAM_API_KEY = st.secrets["api_keys"]["IDEOGRAM_API_KEY"]
 
 # ストーリー生成
 def generate_page_story(main_character, main_character_name, theme, sub_characters, storyline, target_age, page_number, total_pages, previous_content=""):
