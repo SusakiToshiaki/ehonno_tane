@@ -438,7 +438,7 @@ if st.session_state.page == "main":
             <img src="data:image/png;base64,{logo_base64}" alt="ロゴ">
         </div>
         <div class="center-content": margin-bottom: 50px>
-            <h1>毎日少しずつ進む、親子だけの冒険絵本 🪄</h1>
+            <h1>毎日少しずつ進む、親子だけの冒険絵本 &#x1fa84;</h1>
             <p>このアプリは、親子で物語の展開を予想しながら楽しむ、3日間限定の特別な絵本です。<br>
             一度に読み進められるのは少しずつでも、その分「明日はどうなるの？」とドキドキが続きます。</p>
         </div>
