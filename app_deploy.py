@@ -430,6 +430,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# SVG画像をBase64にエンコードする関数
+def svg_to_base64(svg_path):
+    with open(svg_path, "rb") as f:
+        svg_data = f.read()
+    return base64.b64encode(svg_data).decode()
+
+# `wand.svg` のパス
+wand_svg_path = Path("product_image/wand.svg")
+
+# SVG画像をBase64エンコード
+wand_svg_base64 = svg_to_base64(wand_svg_path)
+
 # メインページ
 if st.session_state.page == "main":
     st.markdown(
@@ -438,7 +450,9 @@ if st.session_state.page == "main":
             <img src="data:image/png;base64,{logo_base64}" alt="ロゴ">
         </div>
         <div class="center-content": margin-bottom: 50px>
-            <h1>毎日少しずつ進む、親子だけの冒険絵本 &#x1fa84;</h1>
+            <h1>毎日少しずつ進む、親子だけの冒険絵本
+            <img src="data:image/svg+xml;base64,{wand_svg_base64}" alt="🪄" style="width: 1.2em; height: auto; vertical-align: middle;">
+            </h1>
             <p>このアプリは、親子で物語の展開を予想しながら楽しむ、3日間限定の特別な絵本です。<br>
             一度に読み進められるのは少しずつでも、その分「明日はどうなるの？」とドキドキが続きます。</p>
         </div>
