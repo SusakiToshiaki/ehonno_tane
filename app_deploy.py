@@ -785,9 +785,19 @@ elif st.session_state.page == "result":
 
     st.title("📚 絵本を表示 📚")
 
+    # セッションステートをクリアする関数
+    def reset_session_state():
+        keys_to_clear = [
+            "loaded_book_data", "selected_prompt", "story_elements",
+            "uploaded_image", "is_image_analyzed", "nouns",
+            "themes", "deep_questions", "user_answers"
+        ]
+        for key in keys_to_clear:
+            if key in st.session_state:
+                del st.session_state[key]
+
     # 保存済みの絵本データがセッションにある場合
     if "loaded_book_data" in st.session_state:
-        # スプレッドシートからロードされたデータを使用
         book_data = st.session_state["loaded_book_data"]
         book_id = book_data[0][0]  # 絵本IDを取得
 
@@ -810,21 +820,15 @@ elif st.session_state.page == "result":
     elif "selected_prompt" in st.session_state or "story_elements" in st.session_state:
         st.write("新しい絵本を生成")
 
-        # (A) 選択されたプロンプトがある場合
-        if "selected_prompt" in st.session_state and st.session_state["selected_prompt"]:
+        # ストーリー要素を取得
+        if "selected_prompt" in st.session_state:
             selected_prompt = st.session_state["selected_prompt"]
             random_row = selected_prompt.split(", ")
-
-            # プロンプトからストーリー要素を取得
             maincharacter, maincharacter_name, location, theme, subcharacter_A, subcharacter_B, storyline = (
                 random_row + [""] * 7
             )[:7]
-
-        # (B) 画像解析から生成されたストーリー要素がある場合
-        elif "story_elements" in st.session_state and st.session_state["story_elements"]:
+        elif "story_elements" in st.session_state:
             story_elements = st.session_state["story_elements"]
-
-            # 画像解析結果からストーリー要素を取得
             maincharacter = story_elements.get("maincharacter", "")
             maincharacter_name = story_elements.get("maincharacter_name", "")
             location = story_elements.get("location", "")
@@ -832,13 +836,10 @@ elif st.session_state.page == "result":
             subcharacter_A = story_elements.get("subcharacter_A", "")
             subcharacter_B = story_elements.get("subcharacter_B", "")
             storyline = story_elements.get("storyline", "")
-
         else:
-            # データがどちらにも存在しない場合
             st.error("プロンプトまたは画像解析結果が見つかりません。")
             st.stop()
 
-        # サブキャラクターをリストにまとめる
         sub_characters = [char for char in [subcharacter_A, subcharacter_B] if char]
 
         # 絵本を生成
@@ -855,12 +856,10 @@ elif st.session_state.page == "result":
                 )
 
                 # Google Spreadsheetへの保存準備
-                SCOPES = [
+                credentials = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=[
                     "https://www.googleapis.com/auth/spreadsheets",
                     "https://www.googleapis.com/auth/drive"
-                ]
-
-                credentials = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=SCOPES)
+                ])
                 client = gspread.authorize(credentials)
                 spreadsheet = client.open_by_key(SPREADSHEET_ID)
 
@@ -906,14 +905,6 @@ elif st.session_state.page == "result":
 
     # メインページに戻るボタン
     if st.button("メインページへ戻る"):
-        keys_to_clear = [
-        "loaded_book_data", "selected_prompt", "story_elements", 
-        "uploaded_image", "is_image_analyzed", "nouns", 
-        "themes", "deep_questions", "user_answers"
-        ]
-        for key in keys_to_clear:
-            if key in st.session_state:
-                del st.session_state[key]
-    
-        # メインページへ遷移
+        reset_session_state()
         set_page("main")
+
