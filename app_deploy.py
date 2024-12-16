@@ -906,4 +906,14 @@ elif st.session_state.page == "result":
 
     # メインページに戻るボタン
     if st.button("メインページへ戻る"):
+        keys_to_clear = [
+        "loaded_book_data", "selected_prompt", "story_elements", 
+        "uploaded_image", "is_image_analyzed", "nouns", 
+        "themes", "deep_questions", "user_answers"
+        ]
+        for key in keys_to_clear:
+            if key in st.session_state:
+                del st.session_state[key]
+    
+        # メインページへ遷移
         set_page("main")
