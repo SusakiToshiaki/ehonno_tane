@@ -434,34 +434,11 @@ st.markdown(
 if st.session_state.page == "main":
     st.markdown(
         f"""
-        <style>
-            .logo-container {{
-                text-align: center;
-                margin-bottom: 20px;
-            }}
-            .center-content {{
-                text-align: center;
-                margin-top: 20px;
-            }}
-            .center-content h1 {{
-                font-size: 2em;
-                font-weight: bold;
-                color: white;
-            }}
-            .center-content p {{
-                font-size: 1.2em;
-                color: white;
-            }}
-            .emoji {{
-                font-size: 1.5em;
-                vertical-align: middle;
-            }}
-        </style>
         <div class="logo-container">
             <img src="data:image/png;base64,{logo_base64}" alt="ロゴ">
         </div>
-        <div class="center-content">
-            <h1>毎日少しずつ進む、親子だけの冒険絵本 <span class="emoji">🪄</span></h1>
+        <div class="center-content": margin-bottom: 50px>
+            <h1>毎日少しずつ進む、親子だけの冒険絵本 🪄</h1>
             <p>このアプリは、親子で物語の展開を予想しながら楽しむ、3日間限定の特別な絵本です。<br>
             一度に読み進められるのは少しずつでも、その分「明日はどうなるの？」とドキドキが続きます。</p>
         </div>
