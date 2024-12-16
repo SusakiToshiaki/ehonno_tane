@@ -21,12 +21,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 # ZIPファイルを解凍
-model_path = "en_core_web_sm"
-if not Path(model_path).exists():
-    with zipfile.ZipFile("en_core_web_sm.zip", 'r') as zip_ref:
-        zip_ref.extractall(".")
-
-# ローカルディレクトリからモデルをロード
+model_path = "./en_core_web_sm"
 nlp = spacy.load(model_path)
 
 
